@@ -1,19 +1,26 @@
 {
   "name": "test-web",
   "private": true,
+  "workspaces": [
+    "frontend/**"
+  ],
   "scripts": {
     "gateway:dev": "yarn workspace @backend/gateway dev",
     "typecheck": "lerna run typecheck",
-    "lint": "tslint --project tsconfig.json -c tslint.json -t codeFrame backend/**/*.ts"
+    "lint": "tslint --project tsconfig.json -c tslint.json -t codeFrame backend/**/*.ts",
+    "start": "yarn workspace @frontend/dashboard dev"
   },
   "devDependencies": {
-    "lerna": "3.15.0",
-    "tslint": "^5.17.0",
-    "husky": "^2.4.1"
+    "husky": "^2.4.1",
+    "lerna": "^3.22.1",
+    "tslint": "^5.17.0"
   },
   "husky": {
     "hooks": {
       "pre-push": "yarn lint && yarn typecheck"
     }
+  },
+  "dependencies": {
+    "typescript": "^4.0.3"
   }
 }
