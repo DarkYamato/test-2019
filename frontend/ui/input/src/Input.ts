@@ -1,13 +1,16 @@
 import { createElement, KeyboardEvent } from 'react'
 import Wrapper from './Wrapper'
+import ErrorText from './ErrorText'
 import styled from '@emotion/styled'
 import { ifProp } from 'styled-tools'
 
 export interface InputElementProps {
   color?: string
+  border?: string
   borderColor?: string
   disabled?: boolean
-  error?: boolean
+  error?: boolean | string
+  errorMessage?: string
   warning?: boolean
   transparent?: boolean
   select?: boolean
@@ -28,7 +31,7 @@ export interface InputProps extends InputElementProps {
 const InputElement = styled('input', {
   shouldForwardProp: prop =>
     !['borderColor', 'error', 'transparent', 'select'].includes(prop),
-})<WrapperElementProps>(
+})<InputElementProps>(
   ({ color, borderColor, theme }) => ({
     width: '100%',
     height: 40,
@@ -103,6 +106,8 @@ const Input = ({
   value,
   placeholder,
   readOnly,
+  error,
+  errorMessage,
   onChange,
   onKeyPress,
   onEnter,
@@ -118,6 +123,7 @@ const Input = ({
       value,
       placeholder,
       readOnly,
+      error,
       onChange: ({ target }) => onChange(target.value),
       onKeyPress: event => {
         if (event.key === 'Enter' && onEnter) {
@@ -129,7 +135,8 @@ const Input = ({
         }
       },
       ...props,
-    })
+    }),
+    errorMessage || error && createElement(ErrorText, null, `${errorMessage || 'Пароли не совпадают'}`)
   )
 
 Input.defaultProps = {

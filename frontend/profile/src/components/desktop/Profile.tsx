@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { injectIntl, InjectedIntl } from 'react-intl'
 import { Column, Layout, Row } from '@ui/layout'
 import { Text } from '@ui/text'
@@ -7,40 +7,33 @@ import { Button } from '@ui/button'
 import { RouteLink } from '@ui/link'
 import messages from '../../messages'
 
-interface IErrors {
-  email?: string
-  password?: string
-}
-
 interface Props {
   intl: InjectedIntl
-  email: string
-  password: string
-  errors: IErrors
-  onLogin: () => void
-  onChangeEmail: (value: string) => void
-  onChangePassword: (value: string) => void
+  firstName: string
+  lastName: string
+  onSave: () => void
+  onChangeLastName: (value: string) => void
+  onChangeFirstName: (value: string) => void
 }
 
-const Login: FC<Props> = ({
-  email,
-  errors,
+const Profile = ({
+  firstName,
+  lastName,
   intl,
-  password,
-  onChangeEmail,
-  onChangePassword,
-  onLogin,
-}) => (
+  onChangeFirstName,
+  onChangeLastName,
+  onSave,
+}: Props) => (
   <Column align='center'>
     <Layout basis={60} />
     <Text size='2xl' height='xs' weight='bold'>
-      {intl.formatMessage(messages.entrance)}
+      {intl.formatMessage(messages.edit)}
     </Text>
     <Layout basis={40} />
     <Row justify='center'>
       <Layout basis={360}>
         <Text size='s' weight='bold' transform='uppercase'>
-          {intl.formatMessage(messages.mail)}
+          {intl.formatMessage(messages.firstName)}
         </Text>
       </Layout>
     </Row>
@@ -48,12 +41,11 @@ const Login: FC<Props> = ({
     <Row justify='center'>
       <Layout basis={360}>
         <Input
-          type='email'
+          type='text'
           border='lightGray'
-          error={errors.email}
-          value={email}
-          onChange={onChangeEmail}
-          placeholder={intl.formatMessage(messages.enterEmail)}
+          value={firstName}
+          onChange={onChangeFirstName}
+          placeholder={intl.formatMessage(messages.enterFirstName)}
         />
       </Layout>
     </Row>
@@ -61,7 +53,7 @@ const Login: FC<Props> = ({
     <Row justify='center'>
       <Layout basis={360}>
         <Text size='s' weight='bold' transform='uppercase'>
-          {intl.formatMessage(messages.password)}
+          {intl.formatMessage(messages.lastName)}
         </Text>
       </Layout>
     </Row>
@@ -69,36 +61,37 @@ const Login: FC<Props> = ({
     <Row justify='center'>
       <Layout basis={360}>
         <Input
-          type='password'
+          type='text'
           border='lightGray'
-          error={errors.password}
-          value={password}
-          onEnter={onLogin}
-          onChange={onChangePassword}
-          placeholder={intl.formatMessage(messages.enterPassword)}
+          value={lastName}
+          onChange={onChangeLastName}
+          placeholder={intl.formatMessage(messages.enterLastName)}
         />
       </Layout>
     </Row>
     <Layout basis={24} />
     <Row justify='center'>
       <Layout basis={360}>
-        <Button text disabled={!email || !password} onClick={onLogin}>
-          {intl.formatMessage(messages.login)}
+        <Button
+          text
+          onClick={onSave}
+        >
+          {intl.formatMessage(messages.save)}
         </Button>
       </Layout>
     </Row>
     <Layout basis={16} />
     <RouteLink
-      to='/auth/registration'
+      to='/'
       size='s'
       height='xs'
       weight='medium'
       color='black'
       hoverColor='blueBayoux'
     >
-      {intl.formatMessage(messages.registration)}
+      {intl.formatMessage(messages.root)}
     </RouteLink>
   </Column>
 )
 
-export default injectIntl(Login)
+export default injectIntl(Profile)

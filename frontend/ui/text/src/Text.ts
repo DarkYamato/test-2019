@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 export interface TextProps {
   size?: string
+  height?: string
   lineHeight?: 'xs' | 's' | 'm' | 'l'
   weight?: 'light' | 'normal' | 'medium' | 'bold'
   color?: string

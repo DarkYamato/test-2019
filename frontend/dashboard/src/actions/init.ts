@@ -39,3 +39,8 @@ export const init = () => async (dispatch, getState, client) => {
 export const clear = () => ({
   type: actions.clear,
 })
+
+export const setErrors = (errors) => ({
+  type: actions.clear,
+  errors
+})

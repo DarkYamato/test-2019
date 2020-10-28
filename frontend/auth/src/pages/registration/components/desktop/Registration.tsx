@@ -7,8 +7,22 @@ import { Button } from '@ui/button'
 import { RouteLink } from '@ui/link'
 import messages from '../../messages'
 
+interface IErrors {
+  email?: string
+  password?: string
+  confirmPassword?: string
+}
+
 interface Props {
   intl: InjectedIntl
+  email: string
+  password: string
+  confirmPassword: string
+  errors: IErrors
+  onRegister: () => void
+  onChangePassword: (value: string) => void
+  onChangeEmail: (value: string) => void
+  onChangeConfirmPassword: (value: string) => void
 }
 
 const Registration = ({
@@ -42,6 +56,7 @@ const Registration = ({
           type='email'
           border='lightGray'
           error={errors.email}
+          errorMessage={errors.email}
           value={email}
           onChange={onChangeEmail}
           placeholder={intl.formatMessage(messages.enterEmail)}
@@ -63,6 +78,7 @@ const Registration = ({
           type='password'
           border='lightGray'
           error={errors.password}
+          errorMessage={errors.password}
           value={password}
           onEnter={onRegister}
           onChange={onChangePassword}
@@ -74,9 +90,10 @@ const Registration = ({
     <Row justify='center'>
       <Layout basis={360}>
         <Input
-          type='password'
+          type='confirmPassword'
           border='lightGray'
           error={password !== confirmPassword}
+          errorMessage={errors.confirmPassword}
           value={confirmPassword}
           onEnter={onRegister}
           onChange={onChangeConfirmPassword}

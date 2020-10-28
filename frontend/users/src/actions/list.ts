@@ -32,6 +32,13 @@ export const load = () => async (dispatch, getState, client) => {
   }
 }
 
+export const addFilter = (filter) => {
+  return {
+    type: actions.addFilter,
+    filter
+  };
+}
+
 export const clear = () => ({
   type: actions.clear,
 })

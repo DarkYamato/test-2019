@@ -57,6 +57,7 @@ export const Row = styled('div', { shouldForwardProp })<RowProps>(
 const Layout = styled.div<LayoutProps>(
   {
     display: 'flex',
+    flexDirection: 'column'
   },
   alignItems,
   justifyContent,

@@ -13,4 +13,8 @@ const initialState = {
 export default createReducer(initialState, {
   [actions.load]: (state, { user }) => ({ ...state, ...user }),
   [actions.clear]: () => initialState,
+  [actions.change]: (state, {field, value}) => ({
+      ...state,
+      profile: {...state.profile, [field]: value}
+    })
 })

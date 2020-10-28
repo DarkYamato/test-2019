@@ -1,2 +1,5 @@
 export const load = '@frontend/me/LOAD'
 export const clear = '@frontend/me/CLEAR'
+export const change = '@frontend/me/CHANGE'
+export const save = '@frontend/me/SAVE'
+export const setErrors = '@frontend/me/SET_ERRORS'
